@@ -4,6 +4,7 @@
   const page = document.body.dataset.page || "home";
   const headerRoot = document.querySelector("#site-header");
   const mainRoot = document.querySelector("#page-main");
+  const footerRoot = document.querySelector("#site-footer");
   const routes = new Set(["location", "grid-lanes"]);
   const exifCachePrefix = "gallery-exif:";
   const sizeCachePrefix = "gallery-size:";
@@ -530,24 +531,24 @@
             </div>
           `
         : "";
-    const titleMarkup = !isCompact && photo.displayTitle ? `<h3>${escapeHtml(photo.displayTitle)}</h3>` : "";
+    const titleMarkup = !isCompact && photo.displayTitle ? `<h3 class="photo-title">${escapeHtml(photo.displayTitle)}</h3>` : "";
     const storyMarkup = !isCompact && photo.story ? `<p>${escapeHtml(photo.story)}</p>` : "";
     const detailsMarkup = !isCompact && !hideTags && metadata ? `<div class="photo-details" aria-label="Photo metadata">${metadata}</div>` : "";
-    const copyMarkup = isCompact
-      ? ""
-      : `
-          <div class="photo-copy">
-            ${titleMarkup}
-            ${metaMarkup}
-            ${storyMarkup}
-            ${detailsMarkup}
-          </div>
-        `;
+    const bodyMarkup = [metaMarkup, storyMarkup, detailsMarkup].filter(Boolean).join("");
+    const copyMarkup =
+      !isCompact && bodyMarkup
+        ? `
+            <div class="photo-copy">
+              ${bodyMarkup}
+            </div>
+          `
+        : "";
 
     return `
       <article class="${cardClass}" style="--ratio: ${ratio}" data-index="${index}" data-width="${photo.width}" data-height="${photo.height}">
         <button type="button" class="photo-trigger" data-index="${index}" aria-label="Open ${escapeHtml(photo.displayTitle)}">
           <div class="photo-frame">
+            ${titleMarkup}
             <img
               src="${escapeHtml(thumbnailCandidates[0])}"
               alt="${escapeHtml(photo.alt)}"
@@ -569,16 +570,26 @@
     headerRoot.innerHTML = `
       <div class="topbar">
         <a class="brand" href="${homeHref()}">
-          <span class="brand-mark">${escapeHtml(site.owner || "Personal Archive")}</span>
+          <span class="hero-name">${escapeHtml(site.owner || "Personal Archive")}</span>
           <span class="brand-name">${escapeHtml(site.title || "Gallery")}</span>
-          <span class="brand-subtitle">${escapeHtml(site.subtitle || "")}</span>
+          <span class="brand-quote">${escapeHtml(site.quote || "")}</span>
         </a>
         <nav class="topnav" aria-label="Views">
           <a href="${homeHref()}" ${page === "home" ? 'aria-current="page"' : ""}>Wall</a>
           <a href="${pageHref("location")}" ${page === "location" ? 'aria-current="page"' : ""}>Location</a>
-          <a href="${pageHref("grid-lanes")}" ${page === "grid-lanes" ? 'aria-current="page"' : ""}>Grid Lanes</a>
+          <a href="${pageHref("grid-lanes")}" ${page === "grid-lanes" ? 'aria-current="page"' : ""}>Grid</a>
         </nav>
       </div>
+    `;
+  }
+
+  function renderFooter() {
+    if (!footerRoot) {
+      return;
+    }
+
+    footerRoot.innerHTML = `
+      <p class="site-footer-subtitle">${escapeHtml(site.subtitle || "")}</p>
     `;
   }
 
@@ -630,7 +641,7 @@
             (group) => `
               <section class="year-group">
                 <div class="year-group-header">
-                  <h2>${escapeHtml(group.year)}</h2>
+                  <h2>- ${escapeHtml(group.year)} -</h2>
                 </div>
                 <div class="masonry-grid">
                   ${group.items.map((photo) => createPhotoCard(photo, photo.index, "photo-card", { hideTags: true })).join("")}
@@ -919,6 +930,7 @@
 
   async function init() {
     renderHeader();
+    renderFooter();
 
     if (!photos.length) {
       createEmptyState();

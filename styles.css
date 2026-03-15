@@ -48,6 +48,27 @@ a {
   padding: 1rem 0 3rem;
 }
 
+#site-footer {
+  margin-top: 80px;
+  font-size: 13px;
+  opacity: 0.55;
+}
+
+.site-signature {
+  margin: 0;
+  color: var(--muted);
+  font-size: inherit;
+  opacity: inherit;
+}
+
+.site-footer-subtitle {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: inherit;
+  line-height: 1.5;
+  opacity: inherit;
+}
+
 .noscript-banner {
   width: var(--content-width);
   margin: 0 auto 2rem;
@@ -74,9 +95,10 @@ a {
   max-width: 44rem;
 }
 
-.brand-mark {
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
+.hero-name {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  opacity: 0.65;
   text-transform: uppercase;
   color: var(--muted);
 }
@@ -88,12 +110,14 @@ a {
   white-space: nowrap;
 }
 
-.brand-subtitle {
+.brand-quote {
   color: var(--muted);
-  font-size: 0.98rem;
+  font-size: 14px;
   line-height: 1.5;
   max-width: 54ch;
   font-style: italic;
+  opacity: 0.6;
+  margin-top: 6px;
 }
 
 .topnav {
@@ -295,11 +319,23 @@ a {
 }
 
 .photo-frame {
+  position: relative;
   overflow: hidden;
   aspect-ratio: var(--ratio, 4 / 5);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.18), transparent),
     #d9d2c8;
+}
+
+.photo-frame::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(180deg, rgba(23, 33, 43, 0), rgba(23, 33, 43, 0.58));
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
 }
 
 .photo-frame img {
@@ -309,11 +345,42 @@ a {
   transition: transform 260ms ease;
 }
 
+.photo-title {
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.85rem;
+  z-index: 1;
+  margin: 0;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.22);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
 .photo-card:hover .photo-frame img,
 .photo-card:focus-within .photo-frame img,
 .lane-card:hover .photo-frame img,
 .lane-card:focus-within .photo-frame img {
   transform: scale(1.025);
+}
+
+.photo-card:hover .photo-frame::after,
+.photo-card:focus-within .photo-frame::after {
+  opacity: 1;
+}
+
+.photo-card:hover .photo-title,
+.photo-card:focus-within .photo-title {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .photo-copy {
@@ -670,7 +737,7 @@ a {
     max-width: none;
   }
 
-  .brand-subtitle {
+  .brand-quote {
     max-width: none;
   }
 

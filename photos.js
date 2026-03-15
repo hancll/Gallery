@@ -1,6 +1,8 @@
 window.GALLERY_SITE = {
   title: "Collect moments, not things",
-  owner: "Hanc.L 瀚",
+  quote: "Having it for one day is better than never finding it at all.",
+  subtitle: "Personal photo archive",
+  owner: "HANC.L 瀚",
 };
 
 // For JPEG files, timestamp/camera/lens can be read from EXIF automatically.
@@ -16,7 +18,7 @@ window.GALLERY_PHOTOS = [
   },
   {
     src: "photos/P1000114.jpeg",
-    title: "Ferry Crossing",
+    title: "轮渡",
     location: "Edmonds, Washington",
   },
 ];

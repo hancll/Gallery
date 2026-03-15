@@ -18,7 +18,7 @@ window.GALLERY_PHOTOS = [
   },
   {
     src: "photos/P1000114.jpeg",
-    title: "轮渡",
+    title: "小镰仓轮渡",
     location: "Edmonds, Washington",
   },
 ];

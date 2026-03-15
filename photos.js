@@ -13,5 +13,10 @@ window.GALLERY_PHOTOS = [
     title: "Skyline Loop",
     location: "Mount Rainier, Washington",
     collection: "Hiking",
-  }
+  },
+  {
+    src: "photos/P1000114.jpeg",
+    title: "Ferry Crossing",
+    location: "Edmonds, Washington",
+  },
 ];

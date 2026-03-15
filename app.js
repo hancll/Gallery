@@ -537,8 +537,8 @@
       ? ""
       : `
           <div class="photo-copy">
-            ${metaMarkup}
             ${titleMarkup}
+            ${metaMarkup}
             ${storyMarkup}
             ${detailsMarkup}
           </div>

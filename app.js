@@ -808,10 +808,6 @@
       <div class="lightbox-backdrop" data-close-lightbox></div>
       <div class="lightbox-panel">
         <div class="lightbox-toolbar">
-          <div>
-            <strong>${escapeHtml(site.title || "Gallery")}</strong>
-            <p>Use arrow keys or the on-screen buttons to move through the archive.</p>
-          </div>
           <button type="button" data-close-lightbox>Close</button>
         </div>
         <div class="lightbox-stage">

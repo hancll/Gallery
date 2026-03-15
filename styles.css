@@ -655,6 +655,7 @@ a {
   color: var(--text);
   border-radius: 999px;
   cursor: pointer;
+  opacity: 0.55;
   transition: background 150ms ease, transform 150ms ease;
 }
 
@@ -667,6 +668,7 @@ a {
 .lightbox-nav button:hover,
 .lightbox-nav button:focus-visible {
   background: rgba(238, 243, 248, 0.96);
+  opacity: 1;
   transform: translateY(-1px);
 }
 
@@ -701,11 +703,12 @@ a {
 
 .lightbox-figure strong {
   display: block;
-  font-size: 1.1rem;
+  font-size: 18px;
 }
 
 .lightbox-figure span {
   color: var(--muted);
+  font-size: 13px;
 }
 
 .lightbox-nav button {

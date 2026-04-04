@@ -1,6 +1,6 @@
 window.GALLERY_SITE = {
-  title: "Collect moments, not things",
-  quote: "Having it for one day is better than never finding it at all.",
+  title: "",
+  quote: "Some days I get to live twice — once when it happens, and once when I remember it.",
   subtitle: "Personal photo archive",
   owner: "HANC.L 瀚",
 };

@@ -567,12 +567,19 @@
   }
 
   function renderHeader() {
+    const titleMarkup = site.title
+      ? `<span class="brand-name">${escapeHtml(site.title)}</span>`
+      : "";
+    const quoteMarkup = site.quote
+      ? `<span class="hero-quote">${escapeHtml(site.quote)}</span>`
+      : "";
+
     headerRoot.innerHTML = `
       <div class="topbar">
         <a class="brand" href="${homeHref()}">
           <span class="hero-name">${escapeHtml(site.owner || "Personal Archive")}</span>
-          <span class="brand-name">${escapeHtml(site.title || "Gallery")}</span>
-          <span class="brand-quote">${escapeHtml(site.quote || "")}</span>
+          ${titleMarkup}
+          ${quoteMarkup}
         </a>
         <nav class="topnav" aria-label="Views">
           <a href="${homeHref()}" ${page === "home" ? 'aria-current="page"' : ""}>Wall</a>
@@ -590,6 +597,7 @@
 
     footerRoot.innerHTML = `
       <p class="site-footer-subtitle">${escapeHtml(site.subtitle || "")}</p>
+      <p class="site-signature">© ${escapeHtml(site.owner || "Personal Archive")}</p>
     `;
   }
 

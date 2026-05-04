@@ -403,6 +403,10 @@
         }
 
         const metadata = parseExifFromJpeg(await response.arrayBuffer());
+        if (!Object.keys(metadata).length) {
+          continue;
+        }
+
         writeExifCache(photo, metadata);
         return metadata;
       }
@@ -943,7 +947,10 @@
 
     createLoadingState();
     const enrichedPhotos = await enrichPhotos(photos);
-    const orderedPhotos = sortByDateDescending(enrichedPhotos);
+    const orderedPhotos = sortByDateDescending(enrichedPhotos).map((photo, index) => ({
+      ...photo,
+      index,
+    }));
     let activePhotos = orderedPhotos;
 
     if (page === "location") {
